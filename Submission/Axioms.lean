@@ -7,6 +7,7 @@ anything beyond Lean's three standard axioms (`propext`, `Classical.choice`, `Qu
 are complete. It does not check that each statement says what its source says.
 -/
 import UncontainabilityLean
+import AlignmentUndecidability
 import AISafetyAtlas.Learning.Sharp
 import Submission.Examples
 
@@ -73,3 +74,35 @@ import Submission.Examples
 /-- info: 'UncontainabilityLean.Generality.deficit_bound_sharp' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs in
 #print axioms UncontainabilityLean.Generality.deficit_bound_sharp
+
+/-- info: 'AlignmentUndecidability.alignedVac_undecidable' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs in
+#print axioms AlignmentUndecidability.alignedVac_undecidable
+
+/-- info: 'AlignmentUndecidability.alignedTot_undecidable' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs in
+#print axioms AlignmentUndecidability.alignedTot_undecidable
+
+/-- info: 'AlignmentUndecidability.alignedVac_undecidable_by_reduction' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs in
+#print axioms AlignmentUndecidability.alignedVac_undecidable_by_reduction
+
+/-- info: 'AlignmentUndecidability.alignedTot_undecidable_by_reduction' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs in
+#print axioms AlignmentUndecidability.alignedTot_undecidable_by_reduction
+
+/-- info: 'AlignmentUndecidability.T2'_undecidable' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs in
+#print axioms AlignmentUndecidability.T2'_undecidable
+
+/-- info: 'AlignmentUndecidability.T1_adversary' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs in
+#print axioms AlignmentUndecidability.T1_adversary
+
+/-- info: 'AlignmentUndecidability.T1_no_verifier_vac' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs in
+#print axioms AlignmentUndecidability.T1_no_verifier_vac
+
+/-- info: 'AlignmentUndecidability.T1_no_verifier_tot' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs in
+#print axioms AlignmentUndecidability.T1_no_verifier_tot

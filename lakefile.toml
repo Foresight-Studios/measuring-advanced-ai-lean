@@ -1,7 +1,7 @@
 name = "SIMeasurementLean"
 version = "0.1.0"
 keywords = ["math"]
-defaultTargets = ["UncontainabilityLean", "Submission"]
+defaultTargets = ["UncontainabilityLean", "AlignmentUndecidability", "Submission"]
 
 [leanOptions]
 pp.unicode.fun = true
@@ -30,3 +30,11 @@ roots = ["AISafetyAtlas.Learning", "AISafetyAtlas.Learning.Sharp", "AISafetyAtla
 [[lean_lib]]
 name = "Submission"
 globs = ["Submission.+"]
+
+# The formalization of Melo et al. 2025 (claims MTH-C1 and MTH-C3), copied unchanged with its
+# licence from Vendor/MachinesThatHalt/ in the project's working repository (upstream:
+# machines-that-halt-lean at commit 6aa93b4f5010b64d4377af97ca97994c319d46d2, Apache-2.0).
+[[lean_lib]]
+name = "AlignmentUndecidability"
+srcDir = "Vendor/MachinesThatHalt"
+roots = ["AlignmentUndecidability"]
