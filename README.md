@@ -33,6 +33,10 @@ Each claim's full entry (the source's words, every Lean declaration, the verdict
 
 The research results the comment cites without a Lean proof (Benton et al. 2024; Greenblatt et al. 2024; Hackenburg et al. 2025; Zhou et al. 2025) are listed with links in the comment's Annex B.
 
+## Ratings for the research brief
+
+The folder [`brief-ratings/`](brief-ratings/) holds the ratings behind the project's research brief *Can Advanced AI Systems Be Told Apart by Measurement?*. The brief rates 55 ways of classifying AI systems on six tests, and the folder gives each rating with its reason and a source link.
+
 ## Checking the proofs
 
 Install Lean with [elan](https://github.com/leanprover/elan), then from this directory:
