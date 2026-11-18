@@ -343,12 +343,24 @@ structure TaskLink {T : Type*} (d : T → ℝ) (A : T → Prop) (ψ : ℝ → �
 -- STATEMENT UNREVIEWED
 /-- **SI Proposition 13** (PDF p. 37): "if an agent is s-saturated then for every task μ_b
 such that A_b = 1 in the saturated area then for all other tasks a with h(μ_a) ≤ h(μ_b) we
-have that A_a = 1." The hypothesis that task `b` is accomplished (`_hAb`) is in the source
-and is not used: saturation alone gives the conclusion (`accomplished_of_saturated`). -/
+have that A_a = 1." **Definitional given `TaskLink`**: the conclusion is the assumed field
+`TaskLink.accomplished_of_one` applied to saturation. The source's hypothesis that task `b` is
+accomplished (A_b = 1) is **not needed** and is not in this statement (content review,
+2026-11-18): saturation alone gives the conclusion, so the "transitivity" from `b` to `a`
+carries no information beyond `accomplished_of_saturated`. The statement with the source's
+hypothesis is `task_transitivity_original`. -/
 theorem task_transitivity {T : Type*} {d : T → ℝ} {A : T → Prop} {ψ : ℝ → ℝ} {s : ℝ}
-    (L : TaskLink d A ψ) (hs : Saturated s ψ) {a b : T} (hb : d b ≤ s) (_hAb : A b)
+    (L : TaskLink d A ψ) (hs : Saturated s ψ) {a b : T} (hb : d b ≤ s)
     (hab : d a ≤ d b) : A a :=
   L.accomplished_of_one a (hs _ (L.difficulty_nonneg a) (hab.trans hb))
+
+-- STATEMENT UNREVIEWED
+/-- SI Proposition 13 with every hypothesis of the source, including `A b` (task `b` is
+accomplished), which the proof does not use. Kept so that the source's form stays on record. -/
+theorem task_transitivity_original {T : Type*} {d : T → ℝ} {A : T → Prop} {ψ : ℝ → ℝ} {s : ℝ}
+    (L : TaskLink d A ψ) (hs : Saturated s ψ) {a b : T} (hb : d b ≤ s) (_hAb : A b)
+    (hab : d a ≤ d b) : A a :=
+  task_transitivity L hs hb hab
 
 -- STATEMENT UNREVIEWED
 /-- What the proof of SI Proposition 13 shows (PDF p. 37: "If an agent is s-saturated then

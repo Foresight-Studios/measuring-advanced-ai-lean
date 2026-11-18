@@ -84,11 +84,13 @@ theorem task_level_hoeffding (n : ℕ) (hn : 0 < n) (X : Fin n → Ω → ℝ)
     _ = 2 * exp (-2 * n * ε ^ 2) := by ring
 
 /-- Sample-size certificate: n ≥ ln(2/δ)/(2ε²) tasks suffice for accuracy ε with
-failure probability at most δ. -/
+failure probability at most δ, for a fixed model. The drafted hypothesis `δ < 1` is not
+needed (content review, 2026-11-18); the drafted statement with it is
+`sample_size_certificate_original`. -/
 theorem sample_size_certificate (n : ℕ) (hn : 0 < n) (X : Fin n → Ω → ℝ)
     (hind : iIndepFun X μ) (hmeas : ∀ i, Measurable (X i))
     (hbd : ∀ i ω, X i ω ∈ Set.Icc (0 : ℝ) 1) (m : ℝ) (hmean : ∀ i, μ[X i] = m)
-    {ε δ : ℝ} (hε : 0 < ε) (hδ0 : 0 < δ) (hδ1 : δ < 1)
+    {ε δ : ℝ} (hε : 0 < ε) (hδ0 : 0 < δ)
     (hsize : log (2 / δ) / (2 * ε ^ 2) ≤ n) :
     μ.real {ω | ε ≤ |(∑ i, X i ω) / n - m|} ≤ δ := by
   refine (task_level_hoeffding μ n hn X hind hmeas hbd m hmean hε).trans ?_
@@ -101,11 +103,22 @@ theorem sample_size_certificate (n : ℕ) (hn : 0 < n) (X : Fin n → Ω → ℝ
     rwa [exp_neg, exp_log (by positivity), inv_div] at h1
   linarith
 
+/-- The statement of `sample_size_certificate` as first drafted, with the hypothesis
+`δ < 1`, which the proof does not use. Kept so that the drafted statement stays on record. -/
+theorem sample_size_certificate_original (n : ℕ) (hn : 0 < n) (X : Fin n → Ω → ℝ)
+    (hind : iIndepFun X μ) (hmeas : ∀ i, Measurable (X i))
+    (hbd : ∀ i ω, X i ω ∈ Set.Icc (0 : ℝ) 1) (m : ℝ) (hmean : ∀ i, μ[X i] = m)
+    {ε δ : ℝ} (hε : 0 < ε) (hδ0 : 0 < δ) (_hδ1 : δ < 1)
+    (hsize : log (2 / δ) / (2 * ε ^ 2) ≤ n) :
+    μ.real {ω | ε ≤ |(∑ i, X i ω) / n - m|} ≤ δ :=
+  sample_size_certificate μ n hn X hind hmeas hbd m hmean hε hδ0 hsize
+
 -- STATEMENT UNREVIEWED (written by Fable, session 2, block A4).
 -- Source: project sheet, row Dhar, "task-level bound n ≥ ln(2/δ)/(2ε²) ⇒ accuracy ε at
 -- confidence δ"; derived from eq. (11), p. 8 of arXiv 2511.11773 for a fixed hypothesis.
-/-- Proposed replacement for `sample_size_certificate` without its unused hypothesis
-`δ < 1`. -/
+/-- The replacement first proposed for `sample_size_certificate`, without its unused
+hypothesis `δ < 1`. Since the content review of 2026-11-18 `sample_size_certificate` itself
+has this statement; the name is kept for the ledger. -/
 theorem sample_size_certificate_proposed (n : ℕ) (hn : 0 < n) (X : Fin n → Ω → ℝ)
     (hind : iIndepFun X μ) (hmeas : ∀ i, Measurable (X i))
     (hbd : ∀ i ω, X i ω ∈ Set.Icc (0 : ℝ) 1) (m : ℝ) (hmean : ∀ i, μ[X i] = m)

@@ -15,8 +15,11 @@ Targets (from "Lean Formalization Practical Benefits", row METR):
   * compounding, union bound:   P(any of n steps fails) ≤ n·ε
 Out of scope by design: the growth trend (that stays estimation).
 
-STATUS: statements drafted by Opus from the paper and the sheet. Every `sorry` is a
-Fable task. Statement fidelity must be checked by a human reviewer before "certified".
+STATUS: statements drafted by Opus from the paper and the sheet; all are proved (the file
+has no `sorry`). Statement fidelity must be checked by a human reviewer before "certified".
+
+Content review, 2026-11-18: `horizonAt_eighty` and `compound_product` no longer carry the
+hypotheses their proofs never used; the drafted statements are kept as `…_original`.
 -/
 import Mathlib
 
@@ -95,17 +98,27 @@ theorem pSuccess_horizonAt {h β r : ℝ} (hh : 0 < h) (hβ : 0 < β) (hr0 : 0 <
   unfold pSuccess
   rw [logit_horizonAt hh hβ hr0 hr1, logistic_log_odds hr0 hr1]
 
-/-- 80-versus-50 ratio law. -/
-theorem horizonAt_eighty {h β : ℝ} (hh : 0 < h) (hβ : 0 < β) :
+/-- 80-versus-50 ratio law. **Definitional**: `odds (4/5) = 4`, so the identity holds by
+unfolding, for every real `h` and `β`. The sheet's hypotheses `0 < h` and `0 < β` are not
+needed (content review, 2026-11-18); the drafted statement with them is
+`horizonAt_eighty_original`. -/
+theorem horizonAt_eighty (h β : ℝ) :
     horizonAt h β (4 / 5) = h * (4 : ℝ) ^ (-(1 / β)) := by
   unfold horizonAt odds
   norm_num
 
+/-- The statement of `horizonAt_eighty` as first drafted, with the hypotheses `0 < h` and
+`0 < β`, which the proof does not use. Kept so that the drafted statement stays on record. -/
+theorem horizonAt_eighty_original {h β : ℝ} (_hh : 0 < h) (_hβ : 0 < β) :
+    horizonAt h β (4 / 5) = h * (4 : ℝ) ^ (-(1 / β)) :=
+  horizonAt_eighty h β
+
 -- STATEMENT UNREVIEWED (written by Fable, session 2, block A4).
 -- Source: project sheet, row METR, "80-versus-50 ratio law: h_0.8 = h · 4^(−1/β)"; not a
 -- displayed statement of Kwa et al. (the paper reports the ratio empirically, p. 7).
-/-- Proposed replacement for `horizonAt_eighty` without its two unused hypotheses
-(`0 < h`, `0 < β`): the identity is definitional, because `odds (4/5) = 4`. -/
+/-- The replacement first proposed for `horizonAt_eighty`, without its two unused hypotheses
+(`0 < h`, `0 < β`). Since the content review of 2026-11-18 `horizonAt_eighty` itself has this
+statement; the name is kept for the ledger. -/
 theorem horizonAt_eighty_proposed (h β : ℝ) :
     horizonAt h β (4 / 5) = h * (4 : ℝ) ^ (-(1 / β)) := by
   unfold horizonAt odds
@@ -131,19 +144,31 @@ theorem pSuccess_lt_of_horizonAt_lt {h β r t : ℝ} (hh : 0 < h) (hβ : 0 < β)
   calc pSuccess h β t < pSuccess h β (horizonAt h β r) := logistic_strictMono key
     _ = r := pSuccess_horizonAt hh hβ hr0 hr1
 
-/-- Compounding, product form: with independent per-step failure rate ε, reliability r
-holds for n steps exactly up to log r / log(1 − ε) steps. -/
+/-- Compounding, product form: `r ≤ (1 − ε)^n` exactly when `n ≤ log r / log(1 − ε)`. That
+`(1 − ε)^n` is the success probability of `n` independent steps is the reader's
+interpretation and is not part of the statement. The sheet's hypothesis `r ≤ 1` is not
+needed (content review, 2026-11-18); the drafted statement with it is
+`compound_product_original`. -/
 theorem compound_product {ε r : ℝ} (n : ℕ) (hε0 : 0 < ε) (hε1 : ε < 1)
-    (hr0 : 0 < r) (hr1 : r ≤ 1) :
+    (hr0 : 0 < r) :
     r ≤ (1 - ε) ^ n ↔ (n : ℝ) ≤ log r / log (1 - ε) := by
   have h1 : 0 < 1 - ε := by linarith
   have hneg : log (1 - ε) < 0 := log_neg h1 (by linarith)
   rw [le_div_iff_of_neg hneg, ← log_pow, log_le_log_iff hr0 (pow_pos h1 n)]
 
+/-- The statement of `compound_product` as first drafted, with the hypothesis `r ≤ 1`, which
+the proof does not use. Kept so that the drafted statement stays on record. -/
+theorem compound_product_original {ε r : ℝ} (n : ℕ) (hε0 : 0 < ε) (hε1 : ε < 1)
+    (hr0 : 0 < r) (_hr1 : r ≤ 1) :
+    r ≤ (1 - ε) ^ n ↔ (n : ℝ) ≤ log r / log (1 - ε) :=
+  compound_product n hε0 hε1 hr0
+
 -- STATEMENT UNREVIEWED (written by Fable, session 2, block A4).
 -- Source: project sheet, row METR, "compounding, product form:
 -- r ≤ (1−ε)^n ↔ n ≤ log r / log(1−ε)"; not in Kwa et al.
-/-- Proposed replacement for `compound_product` without its unused hypothesis `r ≤ 1`. -/
+/-- The replacement first proposed for `compound_product`, without its unused hypothesis
+`r ≤ 1`. Since the content review of 2026-11-18 `compound_product` itself has this statement;
+the name is kept for the ledger. -/
 theorem compound_product_proposed {ε r : ℝ} (n : ℕ) (hε0 : 0 < ε) (hε1 : ε < 1)
     (hr0 : 0 < r) :
     r ≤ (1 - ε) ^ n ↔ (n : ℝ) ≤ log r / log (1 - ε) := by
@@ -164,7 +189,7 @@ theorem compound_product_floor_proposed {ε r : ℝ} (n : ℕ) (hε0 : 0 < ε) (
   have hneg : log (1 - ε) < 0 := log_neg (by linarith) (by linarith)
   have hnonneg : 0 ≤ log r / log (1 - ε) :=
     div_nonneg_of_nonpos (log_nonpos hr0.le hr1) hneg.le
-  rw [compound_product n hε0 hε1 hr0 hr1, Nat.le_floor_iff hnonneg]
+  rw [compound_product n hε0 hε1 hr0, Nat.le_floor_iff hnonneg]
 
 /-- Compounding, union-bound form (no independence needed): if each of n steps fails with
 probability at most ε, some step fails with probability at most n·ε. -/

@@ -6,20 +6,20 @@ This repository holds the machine-checked proofs cited in The Uncontainability P
 
 ## The claims
 
-| Claim | What a Lean proof shows | Source | Lean |
-| --- | --- | --- | --- |
-| DHAR-2 | 738 independent task scores estimate a mean score within 5 points at 95% confidence | Dhar, Oldenburg & Søgaard 2025 | [`DharEstimator.lean`](UncontainabilityLean/Targets/DharEstimator.lean#L88), [`Examples.lean`](Submission/Examples.lean#L49) |
-| DHAR-4 (corrected form) | The published 1/√(nm) error rate does not hold in general; more runs per task cannot replace more tasks | Dhar, Oldenburg & Søgaard 2025 | [`DharEstimator.lean`](UncontainabilityLean/Targets/DharEstimator.lean#L354), [`DharSharp.lean`](UncontainabilityLean/Targets/DharSharp.lean#L266) |
-| NFL-1 | Search agents perform alike exactly when the weighting of tasks is unchanged by relabelling | Igel & Toussaint 2004; Schumacher, Vose & Whitley 2001 | [`Sharp.lean`](Vendor/AISafetyAtlas/Learning/Sharp.lean#L822), [`NFLEscape.lean`](UncontainabilityLean/Targets/NFLEscape.lean#L182) |
-| NFL-4 (corrected form) | Agents can be ranked exactly when the weighting breaks relabelling symmetry | The project's survey, from the same results | [`NFLEscape.lean`](UncontainabilityLean/Targets/NFLEscape.lean#L263) |
-| METR-5 | Overall reliability r holds over n steps of per-step failure ε exactly when n ≤ log r / log(1 − ε) | Kwa et al. 2025 | [`MetrHorizon.lean`](UncontainabilityLean/Targets/MetrHorizon.lean#L136) |
-| METR-6 | n steps each failing with probability at most ε fail together with probability at most nε, with no independence assumed | Kwa et al. 2025 | [`MetrHorizon.lean`](UncontainabilityLean/Targets/MetrHorizon.lean#L171) |
-| MTH-C1, MTH-C3 | No computable procedure decides a non-trivial alignment property for every program | Melo, Máximo, Soma & Castro 2025 | [`Aligned.lean`](Vendor/MachinesThatHalt/AlignmentUndecidability/Aligned.lean#L189), [`Reduction.lean`](Vendor/MachinesThatHalt/AlignmentUndecidability/Reduction.lean#L160), [`Adversary.lean`](Vendor/MachinesThatHalt/AlignmentUndecidability/Adversary.lean#L147) |
-| GEN-7 | The spread of the generality metric is always defined and non-negative; the step curve is the most general | Hernández-Orallo et al. 2021 | [`Extremal.lean`](UncontainabilityLean/Generality/Extremal.lean#L146) |
-| GEN-13 | Spread is zero only for a step curve | Project's own result, on Hernández-Orallo et al. 2021 | [`Extremal.lean`](UncontainabilityLean/Generality/Extremal.lean#L166) |
-| GEN-16 | A system with spread S fails on at most S/√2 difficulty-units of the tasks below its capability; the bound is attained | Project's own result, on Hernández-Orallo et al. 2021 | [`Transitivity.lean`](UncontainabilityLean/Generality/Transitivity.lean#L200) |
+| Claim | Tier | What a Lean proof shows | Source | Lean |
+| --- | --- | --- | --- | --- |
+| DHAR-2 | 4 | 738 independent task scores estimate a mean score within 5 points at 95% confidence | Dhar, Oldenburg & Søgaard 2025 | [`DharEstimator.lean`](UncontainabilityLean/Targets/DharEstimator.lean#L90), [`Examples.lean`](Submission/Examples.lean#L49) |
+| DHAR-4 (corrected form) | 4 | The published 1/√(nm) error rate does not hold in general; more runs per task cannot replace more tasks | Dhar, Oldenburg & Søgaard 2025 | [`DharEstimator.lean`](UncontainabilityLean/Targets/DharEstimator.lean#L367), [`DharSharp.lean`](UncontainabilityLean/Targets/DharSharp.lean#L266) |
+| NFL-1 | 4 | Search agents perform alike exactly when the weighting of tasks is unchanged by relabelling | Igel & Toussaint 2004; Schumacher, Vose & Whitley 2001 | [`Sharp.lean`](Vendor/AISafetyAtlas/Learning/Sharp.lean#L822), [`NFLEscape.lean`](UncontainabilityLean/Targets/NFLEscape.lean#L182) |
+| NFL-4 (corrected form) | 4 | Agents can be ranked exactly when the weighting breaks relabelling symmetry | The project's survey, from the same results | [`NFLEscape.lean`](UncontainabilityLean/Targets/NFLEscape.lean#L263) |
+| METR-5 | 2 | Overall reliability r holds over n steps of per-step failure ε exactly when n ≤ log r / log(1 − ε) | Kwa et al. 2025 | [`MetrHorizon.lean`](UncontainabilityLean/Targets/MetrHorizon.lean#L152) |
+| METR-6 | 2 | n steps each failing with probability at most ε fail together with probability at most nε, with no independence assumed | Kwa et al. 2025 | [`MetrHorizon.lean`](UncontainabilityLean/Targets/MetrHorizon.lean#L196) |
+| MTH-C1, MTH-C3 | 4, 4 | No computable procedure decides a non-trivial alignment property for every program | Melo, Máximo, Soma & Castro 2025 | [`Aligned.lean`](Vendor/MachinesThatHalt/AlignmentUndecidability/Aligned.lean#L189), [`Adversary.lean`](Vendor/MachinesThatHalt/AlignmentUndecidability/Adversary.lean#L100) |
+| GEN-7 | 5 | The spread of the generality metric is always defined and non-negative; the step curve is the most general | Hernández-Orallo et al. 2021 | [`Extremal.lean`](UncontainabilityLean/Generality/Extremal.lean#L146) |
+| GEN-13 | 5 | Spread is zero only for a step curve | Project's own result, on Hernández-Orallo et al. 2021 | [`Extremal.lean`](UncontainabilityLean/Generality/Extremal.lean#L166) |
+| GEN-16 | 5 | A system with spread S fails on at most S/√2 difficulty-units of the tasks below its capability; the bound is attained | Project's own result, on Hernández-Orallo et al. 2021 | [`Transitivity.lean`](UncontainabilityLean/Generality/Transitivity.lean#L200) |
 
-Each claim's full entry (the source's words, every Lean declaration, the verdict) is in [`CLAIMS.md`](CLAIMS.md).
+Each claim's full entry (the source's words, every Lean declaration, the verdict, the tier and why) is in [`CLAIMS.md`](CLAIMS.md). The tier rates how much mathematics the proof carries, from an internal content review: 1 definitional, 2 elementary, 3 premises carry the claim, 4 standard result re-applied, 5 real content. It is not a measure of correctness or usefulness.
 
 ## Sources
 
@@ -49,7 +49,7 @@ A successful build means every proof here checks, and [`Submission/Axioms.lean`]
 
 ## Provenance
 
-- `UncontainabilityLean/` is copied unchanged from The Uncontainability Project's working repository (private), commit `4620c3d`. Comments in these files that mention `papers/`, `policy/` or `NOTES.md` refer to that repository.
+- `UncontainabilityLean/` is copied unchanged from The Uncontainability Project's working repository (private), commit `062e4d7`. Comments in these files that mention `papers/`, `policy/` or `NOTES.md` refer to that repository.
 - `Vendor/AISafetyAtlas/` holds three files copied unchanged from the AI Safety Formalization Atlas at commit `ecf4c4e` (Apache-2.0; licence in that folder).
 - `Vendor/MachinesThatHalt/` holds the formalization of Melo et al. 2025 used for MTH-C1 and MTH-C3, with its claims ledger and licence, copied unchanged from the project's working repository (upstream commit `6aa93b4`, Apache-2.0). The copyright notices in its files are kept as the licence requires.
 - `Submission/Examples.lean` copies the worked example for DHAR-2 from the project's repository unchanged; `Submission/Axioms.lean` is generated for this repository.
